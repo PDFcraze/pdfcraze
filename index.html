@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Free tools to merge, split, compress, and scan PDF files.">
+  <meta name="description" content="Free tools to merge, split, compress, and convert PDFs.">
   <meta name="theme-color" content="#f7f8fc">
   <title>PDFcraze — Simple PDF tools</title>
 
@@ -84,8 +84,8 @@
       height: 42px;
       place-items: center;
       border-radius: 10px;
-      background: var(--logo-bg, #f1f3f7);
-      color: var(--logo-color, #333);
+      background: var(--logo-bg);
+      color: var(--logo-color);
     }
 
     .tool-logo svg {
@@ -114,7 +114,8 @@
     }
 
     input[type="file"],
-    input[type="number"] {
+    input[type="number"],
+    select {
       width: 100%;
       padding: 8px;
       border: 1px solid #dfe4ed;
@@ -143,23 +144,6 @@
     button:hover { background: #dc4936; }
     button:disabled { opacity: .6; cursor: wait; }
 
-    button.coming-button {
-      background: #eceff5;
-      color: #596579;
-      cursor: not-allowed;
-    }
-
-    .coming-label {
-      display: inline-block;
-      margin: 2px 0 10px;
-      padding: 4px 8px;
-      border-radius: 20px;
-      background: #f1f3f7;
-      color: #596579;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
     .status {
       min-height: 20px;
       margin: 8px 0 0 !important;
@@ -180,7 +164,6 @@
     @media (max-width: 520px) {
       .tools { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .tool { padding: 14px; }
-      .tool-heading { align-items: flex-start; }
       .tool h2 { font-size: 16px; }
       .tool-logo { flex-basis: 38px; width: 38px; height: 38px; }
       .tool-logo svg { width: 24px; height: 24px; }
@@ -201,13 +184,14 @@
     <section class="hero">
       <h1>Every PDF tool you need, <span>all in one place.</span></h1>
       <p>
-        Merge, split, compress, convert, rotate, and watermark PDFs with just a few clicks.
+        Merge, split, compress, and create PDFs from photos with just a few clicks.
         Simple, free, and ready whenever you need it.
       </p>
     </section>
 
     <section class="tools" aria-label="PDF tools">
 
+      <!-- Merge PDF -->
       <article class="tool">
         <div class="tool-heading">
           <span class="tool-logo" style="--logo-bg:#fff0ed;--logo-color:#e34b3c" aria-hidden="true">
@@ -226,6 +210,7 @@
         <p class="status" id="mergeStatus" aria-live="polite"></p>
       </article>
 
+      <!-- Split PDF -->
       <article class="tool">
         <div class="tool-heading">
           <span class="tool-logo" style="--logo-bg:#fff0ed;--logo-color:#e34b3c" aria-hidden="true">
@@ -246,6 +231,7 @@
         <p class="status" id="splitStatus" aria-live="polite"></p>
       </article>
 
+      <!-- Compress PDF -->
       <article class="tool">
         <div class="tool-heading">
           <span class="tool-logo" style="--logo-bg:#fff0ed;--logo-color:#e34b3c" aria-hidden="true">
@@ -264,74 +250,7 @@
         <p class="status" id="compressStatus" aria-live="polite"></p>
       </article>
 
-      <article class="tool">
-        <div class="tool-heading">
-          <span class="tool-logo" style="--logo-bg:#eaf2ff;--logo-color:#185abd" aria-hidden="true">
-            <svg viewBox="0 0 32 32">
-              <rect x="5" y="3" width="22" height="26" rx="3" fill="#185abd"/>
-              <path d="M11 11h10M11 16h10M11 21h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-              <path d="M3 9h10v14H3z" fill="#103f91"/>
-              <path d="m5 13 2 7 2-5 2 5 2-7" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <h2>PDF to Word</h2>
-        </div>
-        <p>Turn PDF content into an editable Word document.</p>
-        <span class="coming-label">Coming soon</span>
-        <button class="coming-button" type="button" disabled>PDF to Word</button>
-      </article>
-
-      <article class="tool">
-        <div class="tool-heading">
-          <span class="tool-logo" style="--logo-bg:#eaf2ff;--logo-color:#185abd" aria-hidden="true">
-            <svg viewBox="0 0 32 32">
-              <rect x="5" y="3" width="22" height="26" rx="3" fill="#185abd"/>
-              <path d="M11 11h10M11 16h10M11 21h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-              <path d="M3 9h10v14H3z" fill="#103f91"/>
-              <path d="m5 13 2 7 2-5 2 5 2-7" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
-            </svg>
-          </span>
-          <h2>Word to PDF</h2>
-        </div>
-        <p>Convert Word documents into PDFs that are easy to share and read.</p>
-        <span class="coming-label">Coming soon</span>
-        <button class="coming-button" type="button" disabled>Word to PDF</button>
-      </article>
-
-      <article class="tool">
-        <div class="tool-heading">
-          <span class="tool-logo" style="--logo-bg:#e9f7ef;--logo-color:#217346" aria-hidden="true">
-            <svg viewBox="0 0 32 32">
-              <path d="M17 4h11v24H17z" fill="#217346"/>
-              <path d="M17 9h11M17 15h11M17 21h11M21 9v15M25 9v15" stroke="#fff" stroke-width="1"/>
-              <path d="M4 8 18 5v22L4 24z" fill="#185c37"/>
-              <path d="m8 12 6 8m0-8-6 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h2>Excel to PDF</h2>
-        </div>
-        <p>Make spreadsheets easy to view and share as PDFs.</p>
-        <span class="coming-label">Coming soon</span>
-        <button class="coming-button" type="button" disabled>Excel to PDF</button>
-      </article>
-
-      <article class="tool">
-        <div class="tool-heading">
-          <span class="tool-logo" style="--logo-bg:#e9f7ef;--logo-color:#217346" aria-hidden="true">
-            <svg viewBox="0 0 32 32">
-              <path d="M17 4h11v24H17z" fill="#217346"/>
-              <path d="M17 9h11M17 15h11M17 21h11M21 9v15M25 9v15" stroke="#fff" stroke-width="1"/>
-              <path d="M4 8 18 5v22L4 24z" fill="#185c37"/>
-              <path d="m8 12 6 8m0-8-6 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </span>
-          <h2>PDF to Excel</h2>
-        </div>
-        <p>Extract tables from PDFs into an editable spreadsheet.</p>
-        <span class="coming-label">Coming soon</span>
-        <button class="coming-button" type="button" disabled>PDF to Excel</button>
-      </article>
-
+      <!-- Scan to PDF -->
       <article class="tool">
         <div class="tool-heading">
           <span class="tool-logo" style="--logo-bg:#f0edff;--logo-color:#6650c8" aria-hidden="true">
@@ -349,6 +268,33 @@
         <input id="cameraImages" type="file" accept="image/*" capture="environment" multiple>
         <button id="scanButton" type="button">Create PDF from photos</button>
         <p class="status" id="scanStatus" aria-live="polite"></p>
+      </article>
+
+      <!-- JPG to PDF -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#e8f7f5;--logo-color:#13877e" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <rect x="4" y="6" width="17" height="19" rx="2" fill="#fff" stroke="currentColor" stroke-width="2"/>
+              <circle cx="10" cy="12" r="2" fill="currentColor"/>
+              <path d="m6 22 5-5 3 3 3-4 3 4" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+              <path d="M17 10h11v17H13v-3" fill="#fff" stroke="#e34b3c" stroke-width="2"/>
+              <path d="M20 15h5M20 19h5M20 23h4" stroke="#e34b3c" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h2>JPG to PDF</h2>
+        </div>
+        <p>Convert JPG images into a PDF document in seconds.</p>
+        <label for="jpgFiles">Choose JPG images</label>
+        <input id="jpgFiles" type="file" accept="image/jpeg,.jpg,.jpeg" multiple>
+        <label for="jpgOrientation">Page orientation</label>
+        <select id="jpgOrientation">
+          <option value="auto">Match image</option>
+          <option value="portrait">Portrait</option>
+          <option value="landscape">Landscape</option>
+        </select>
+        <button id="jpgButton" type="button">Create PDF</button>
+        <p class="status" id="jpgStatus" aria-live="polite"></p>
       </article>
 
     </section>
@@ -536,6 +482,69 @@
       } catch (error) {
         console.error(error);
         status.textContent = "Could not convert one or more photos. Try JPG or PNG images.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("jpgButton").addEventListener("click", async () => {
+      const button = document.getElementById("jpgButton");
+      const status = document.getElementById("jpgStatus");
+      const files = Array.from(document.getElementById("jpgFiles").files);
+      const orientation = document.getElementById("jpgOrientation").value;
+
+      if (files.length === 0) {
+        status.textContent = "Choose at least one JPG image.";
+        return;
+      }
+      if (!checkPdfLib(status)) return;
+
+      button.disabled = true;
+      status.textContent = "Creating PDF…";
+
+      try {
+        const pdf = await PDFLib.PDFDocument.create();
+
+        for (const file of files) {
+          if (file.type !== "image/jpeg" && !/\.jpe?g$/i.test(file.name)) {
+            throw new Error("Please choose JPG images only.");
+          }
+
+          const image = await pdf.embedJpg(await file.arrayBuffer());
+          let pageWidth = image.width;
+          let pageHeight = image.height;
+
+          if (orientation !== "auto") {
+            const longSide = Math.max(image.width, image.height);
+            const shortSide = Math.min(image.width, image.height);
+
+            if (orientation === "portrait") {
+              pageWidth = shortSide;
+              pageHeight = longSide;
+            } else {
+              pageWidth = longSide;
+              pageHeight = shortSide;
+            }
+          }
+
+          const page = pdf.addPage([pageWidth, pageHeight]);
+          const scale = Math.min(pageWidth / image.width, pageHeight / image.height);
+          const drawWidth = image.width * scale;
+          const drawHeight = image.height * scale;
+
+          page.drawImage(image, {
+            x: (pageWidth - drawWidth) / 2,
+            y: (pageHeight - drawHeight) / 2,
+            width: drawWidth,
+            height: drawHeight
+          });
+        }
+
+        downloadPdf(await pdf.save(), "jpg-images.pdf");
+        status.textContent = "Done! Your PDF has been downloaded.";
+      } catch (error) {
+        console.error(error);
+        status.textContent = error.message || "Could not convert these images.";
       } finally {
         button.disabled = false;
       }
