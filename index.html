@@ -1,75 +1,232 @@
-html
+```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>PDFcraze — Simple PDF tools</title>
-  <meta name="description" content="Simple tools for working with PDF files.">
+  <meta name="description" content="Merge PDF files for free in your browser with PDFcraze. Your files stay on your device.">
+  <meta name="theme-color" content="#f7f8fa">
+  <title>PDFcraze — Free PDF tools</title>
+
   <style>
     * { box-sizing: border-box; }
+
     body {
       margin: 0;
       font: 16px/1.5 Arial, sans-serif;
       color: #202124;
       background: #f7f8fa;
     }
-    header, main, footer { max-width: 1050px; margin: auto; padding: 24px; }
-    header { display: flex; justify-content: space-between; align-items: center; }
-    .logo { font-size: 24px; font-weight: 700; color: #d93636; }
-    .hero { text-align: center; padding: 48px 16px 28px; }
-    h1 { margin-bottom: 8px; font-size: clamp(30px, 5vw, 46px); }
-    .hero p { color: #60656d; }
-    .tools { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 18px; }
-    .tool {
-      display: block; padding: 24px; border: 1px solid #e4e6e9;
-      border-radius: 12px; background: white; color: inherit; text-decoration: none;
+
+    header, main, footer {
+      width: min(1050px, 100%);
+      margin: auto;
+      padding: 24px;
     }
-    .tool:hover { border-color: #d93636; transform: translateY(-2px); }
-    .icon { font-size: 30px; }
-    .tool h2 { margin: 12px 0 6px; font-size: 20px; }
-    .tool p { margin: 0; color: #60656d; }
-    footer { margin-top: 32px; color: #60656d; font-size: 14px; }
-    footer a { color: inherit; margin-right: 16px; }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      color: #202124;
+      font-size: 24px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .privacy-note {
+      color: #60656d;
+      font-size: 14px;
+    }
+
+    .hero {
+      padding: 48px 16px 36px;
+      text-align: center;
+    }
+
+    .hero h1 {
+      margin: 0 0 12px;
+      font-size: clamp(32px, 6vw, 48px);
+      line-height: 1.15;
+    }
+
+    .hero p {
+      max-width: 600px;
+      margin: 0 auto;
+      color: #60656d;
+    }
+
+    .tools {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding-bottom: 40px;
+    }
+
+    .tool {
+      padding: 24px;
+      border: 1px solid #e1e4e8;
+      border-radius: 14px;
+      background: #fff;
+      box-shadow: 0 3px 12px rgb(0 0 0 / 4%);
+    }
+
+    .icon {
+      font-size: 32px;
+    }
+
+    .tool h2 {
+      margin: 10px 0 6px;
+      font-size: 21px;
+    }
+
+    .tool p {
+      color: #60656d;
+    }
+
+    input[type="file"] {
+      display: block;
+      width: 100%;
+      margin: 16px 0;
+      font: inherit;
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 16px;
+      border: 0;
+      border-radius: 8px;
+      color: #fff;
+      background: #315efb;
+      font: inherit;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    button:hover { background: #244bd1; }
+    button:disabled { opacity: 0.6; cursor: wait; }
+
+    #mergeStatus {
+      min-height: 24px;
+      margin-bottom: 0;
+      font-size: 14px;
+    }
+
+    footer {
+      color: #60656d;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      header, main, footer { padding: 18px; }
+      .hero { padding-top: 36px; }
+    }
   </style>
 </head>
+
 <body>
   <header>
-    <div class="logo">PDFcraze</div>
-    <span>Simple PDF tools</span>
+    <a class="logo" href="./">PDFcraze</a>
+    <span class="privacy-note">Your files stay on your device</span>
   </header>
 
   <main>
     <section class="hero">
-      <h1>PDF tools made simple</h1>
-      <p>Choose a tool to get started. Your files stay on your device where supported.</p>
+      <h1>Simple PDF tools</h1>
+      <p>Merge PDF files quickly and privately in your browser. Your files are not uploaded to a server.</p>
     </section>
 
     <section class="tools" aria-label="PDF tools">
-      <a class="tool" href="#merge">
+      <article class="tool">
         <div class="icon" aria-hidden="true">📄</div>
         <h2>Merge PDF</h2>
-        <p>Combine multiple PDF files into one.</p>
-      </a>
-      <a class="tool" href="#split">
+        <p>Combine two or more PDF files into one document.</p>
+
+        <label for="pdfFiles">Choose PDF files</label>
+        <input id="pdfFiles" type="file" accept="application/pdf,.pdf" multiple>
+
+        <button id="mergeButton" type="button">Merge PDFs</button>
+        <p id="mergeStatus" aria-live="polite"></p>
+      </article>
+
+      <article class="tool">
         <div class="icon" aria-hidden="true">✂️</div>
-        <h2>Split PDF</h2>
-        <p>Separate pages from a PDF file.</p>
-      </a>
-      <a class="tool" href="#compress">
-        <div class="icon" aria-hidden="true">🗜️</div>
-        <h2>Compress PDF</h2>
-        <p>Make a PDF file smaller where possible.</p>
-      </a>
+        <h2>More tools coming soon</h2>
+        <p>We’re working on more simple tools for your PDF files.</p>
+      </article>
     </section>
   </main>
 
   <footer>
-    <a href="mailto:contact@pdfcraze.example">Contact</a>
-    <a href="#privacy">Privacy</a>
-    <a href="#terms">Terms</a>
-    <p>© 2026 PDFcraze</p>
+    <p>PDFcraze — Free PDF tools that work in your browser.</p>
   </footer>
+
+  <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
+  <script>
+    const fileInput = document.getElementById("pdfFiles");
+    const mergeButton = document.getElementById("mergeButton");
+    const status = document.getElementById("mergeStatus");
+
+    mergeButton.addEventListener("click", async () => {
+      const files = Array.from(fileInput.files || []);
+
+      if (files.length < 2) {
+        status.textContent = "Choose at least two PDF files.";
+        return;
+      }
+
+      if (!window.PDFLib) {
+        status.textContent = "The PDF tool could not load. Check your internet connection and try again.";
+        return;
+      }
+
+      mergeButton.disabled = true;
+      status.textContent = "Merging PDFs…";
+
+      let downloadUrl;
+
+      try {
+        const mergedPdf = await PDFLib.PDFDocument.create();
+
+        for (const file of files) {
+          const bytes = await file.arrayBuffer();
+          const sourcePdf = await PDFLib.PDFDocument.load(bytes);
+          const pages = await mergedPdf.copyPages(
+            sourcePdf,
+            sourcePdf.getPageIndices()
+          );
+
+          pages.forEach(page => mergedPdf.addPage(page));
+        }
+
+        const mergedBytes = await mergedPdf.save();
+        const blob = new Blob([mergedBytes], { type: "application/pdf" });
+        downloadUrl = URL.createObjectURL(blob);
+
+        const link = document.createElement("a");
+        link.href = downloadUrl;
+        link.download = "merged.pdf";
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+
+        status.textContent = "Done! Your merged PDF has been downloaded.";
+      } catch (error) {
+        console.error("PDF merge failed:", error);
+        status.textContent = "Could not merge these files. Make sure they are valid, unprotected PDFs.";
+      } finally {
+        mergeButton.disabled = false;
+
+        if (downloadUrl) {
+          setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
+        }
+      }
+    });
+  </script>
 </body>
 </html>
 ```
