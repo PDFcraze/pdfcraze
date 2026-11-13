@@ -1,308 +1,543 @@
+```html
 <!doctype html>
 <html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content=:
-**All your PDF tools, in one place.**  
-Merge, split, compress, convert, rotate, and watermark PDFs with just a few clicks. Simple, free, and ready when you need it.">
-  <meta name="theme-color" content="#f7f8fa">
-  <title>PDFcraze — Free PDF tools</title>
+  <meta name="description" content="Free tools to merge, split, compress, and scan PDF files.">
+  <meta name="theme-color" content="#f7f8fc">
+  <title>PDFcraze — Simple PDF tools</title>
 
   <style>
     * { box-sizing: border-box; }
 
     body {
       margin: 0;
+      background: #f7f8fc;
+      color: #222b3a;
       font: 16px/1.5 Arial, sans-serif;
-      color: #202124;
-      background: #f7f8fa;
-    }
-
-    header, main, footer {
-      width: min(1050px, 100%);
-      margin: auto;
-      padding: 24px;
     }
 
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
+      padding: 22px 6%;
+      background: #fff;
+      border-bottom: 1px solid #edf0f5;
     }
 
-    .logo {
-      color: #202124;
-      font-size: 24px;
-      font-weight: 700;
+    .brand {
+      color: #222b3a;
+      font-size: 27px;
+      font-weight: 800;
+      letter-spacing: -1px;
       text-decoration: none;
     }
 
-    .privacy-note {
-      color: #60656d;
-      font-size: 14px;
-    }
+    .brand span { color: #f15a45; }
 
     .hero {
-      padding: 48px 16px 36px;
+      padding: 52px 20px 36px;
       text-align: center;
     }
 
     .hero h1 {
       margin: 0 0 12px;
-      font-size: clamp(32px, 6vw, 48px);
-      line-height: 1.15;
+      font-size: clamp(34px, 6vw, 52px);
+      line-height: 1.12;
+      letter-spacing: -1.8px;
     }
 
+    .hero h1 span { color: #f15a45; }
+
     .hero p {
-      max-width: 600px;
-      margin: 0 auto;
-      color: #60656d;
+      max-width: 690px;
+      margin: auto;
+      color: #687386;
+      font-size: 18px;
     }
 
     .tools {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
       gap: 20px;
-      padding-bottom: 40px;
+      width: min(1120px, 92%);
+      margin: 0 auto 48px;
     }
 
     .tool {
-      padding: 24px;
-      border: 1px solid #e1e4e8;
-      border-radius: 14px;
+      padding: 23px;
+      border: 1px solid #e9ecf2;
+      border-radius: 15px;
       background: #fff;
-      box-shadow: 0 3px 12px rgb(0 0 0 / 4%);
+      box-shadow: 0 6px 22px rgb(31 45 70 / 5%);
     }
 
-    .icon {
-      font-size: 32px;
+    .tool-heading {
+      display: flex;
+      align-items: center;
+      gap: 13px;
+      margin-bottom: 12px;
+    }
+
+    .tool-logo {
+      display: grid;
+      flex: 0 0 48px;
+      width: 48px;
+      height: 48px;
+      place-items: center;
+      border-radius: 12px;
+      background: var(--logo-bg, #f1f3f7);
+      color: var(--logo-color, #333);
+    }
+
+    .tool-logo svg {
+      display: block;
+      width: 30px;
+      height: 30px;
     }
 
     .tool h2 {
-      margin: 10px 0 6px;
-      font-size: 21px;
+      margin: 0;
+      font-size: 20px;
     }
 
     .tool p {
-      color: #60656d;
+      min-height: 48px;
+      margin: 0 0 15px;
+      color: #687386;
+      font-size: 14px;
+    }
+
+    label {
+      display: block;
+      margin: 12px 0 6px;
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    input[type="file"],
+    input[type="number"] {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #dfe4ed;
+      border-radius: 8px;
+      background: #fff;
+      font: inherit;
     }
 
     input[type="file"] {
-      display: block;
-      width: 100%;
-      margin: 16px 0;
-      font: inherit;
+      padding: 8px;
+      background: #fafbfe;
     }
 
     button {
       width: 100%;
-      padding: 12px 16px;
+      margin-top: 14px;
+      padding: 12px 15px;
       border: 0;
       border-radius: 8px;
+      background: #f15a45;
       color: #fff;
-      background: #315efb;
       font: inherit;
       font-weight: 700;
       cursor: pointer;
     }
 
-    button:hover { background: #244bd1; }
-    button:disabled { opacity: 0.6; cursor: wait; }
+    button:hover { background: #dc4936; }
+    button:disabled { opacity: .6; cursor: wait; }
 
-    #mergeStatus {
-      min-height: 24px;
-      margin-bottom: 0;
-      font-size: 14px;
+    button.coming-button {
+      background: #eceff5;
+      color: #596579;
+      cursor: not-allowed;
+    }
+
+    .coming-label {
+      display: inline-block;
+      margin: 3px 0 12px;
+      padding: 4px 9px;
+      border-radius: 20px;
+      background: #f1f3f7;
+      color: #596579;
+      font-size: 12px;
+      font-weight: 700;
+    }
+
+    .status {
+      min-height: 22px;
+      margin: 10px 0 0 !important;
+      font-size: 13px !important;
     }
 
     footer {
-      color: #60656d;
+      padding: 22px;
+      color: #778195;
       text-align: center;
-      font-size: 14px;
+      font-size: 13px;
     }
 
     @media (max-width: 600px) {
-      header, main, footer { padding: 18px; }
-      .hero { padding-top: 36px; }
+      .hero { padding-top: 38px; }
+      .tools { width: 92%; }
     }
   </style>
 </head>
 
 <body>
   <header>
-    <a class="logo" href="./">PDFcraze</a>
-    <span class="privacy-note">Your files stay on your device</span>
+    <a class="brand" href="./">PDF<span>craze</span></a>
   </header>
 
   <main>
     <section class="hero">
-      <h1>Simple PDF tools</h1>
-      <p>Merge PDF files quickly and privately in your browser. Your files are not uploaded to a server.</p>
+      <h1>Every PDF tool you need, <span>all in one place.</span></h1>
+      <p>
+        Merge, split, compress, convert, rotate, and watermark PDFs with just a few clicks.
+        Simple, free, and ready whenever you need it.
+      </p>
     </section>
 
     <section class="tools" aria-label="PDF tools">
+
+      <!-- 1. Merge PDF -->
       <article class="tool">
-        <div class="icon" aria-hidden="true">📄</div>
-        <h2>Merge PDF</h2>
-        <p>Combine two or more PDF files into one document.</p>
-
-        <label for="pdfFiles">Choose PDF files</label>
-        <input id="pdfFiles" type="file" accept="application/pdf,.pdf" multiple>
-
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#fff0ed;--logo-color:#e34b3c" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M7 5h12l6 6v16H7z" fill="#fff" stroke="currentColor" stroke-width="2"/>
+              <path d="M19 5v7h6M11 17h10M11 21h10" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="M4 11v16h15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h2>Merge PDF</h2>
+        </div>
+        <p>Combine PDFs in the order you choose with a few clicks.</p>
+        <label for="mergeFiles">Choose PDF files</label>
+        <input id="mergeFiles" type="file" accept="application/pdf,.pdf" multiple>
         <button id="mergeButton" type="button">Merge PDFs</button>
-        <p id="mergeStatus" aria-live="polite"></p>
+        <p class="status" id="mergeStatus" aria-live="polite"></p>
       </article>
 
+      <!-- 2. Split PDF -->
       <article class="tool">
-        <div class="icon" aria-hidden="true">✂️</div>
-        <h2>More tools coming soon</h2>
-        <p>We’re working on more simple tools for your PDF files.</p>
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#fff0ed;--logo-color:#e34b3c" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M8 4h11l6 6v18H8z" fill="#fff" stroke="currentColor" stroke-width="2"/>
+              <path d="M19 4v7h6M11 16h11M11 20h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="m18 20 5 5m0-5-5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h2>Split PDF</h2>
+        </div>
+        <p>Extract a page from a PDF and save it as a separate file.</p>
+        <label for="splitFile">Choose a PDF</label>
+        <input id="splitFile" type="file" accept="application/pdf,.pdf">
+        <label for="splitPage">Page number to extract</label>
+        <input id="splitPage" type="number" min="1" value="1">
+        <button id="splitButton" type="button">Extract page</button>
+        <p class="status" id="splitStatus" aria-live="polite"></p>
       </article>
+
+      <!-- 3. Compress PDF -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#fff0ed;--logo-color:#e34b3c" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M8 4h11l6 6v18H8z" fill="#fff" stroke="currentColor" stroke-width="2"/>
+              <path d="M19 4v7h6M11 16h11M11 20h8" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              <path d="m12 25 4-3 4 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h2>Compress PDF</h2>
+        </div>
+        <p>Try to reduce a PDF’s file size while keeping its pages intact.</p>
+        <label for="compressFile">Choose a PDF</label>
+        <input id="compressFile" type="file" accept="application/pdf,.pdf">
+        <button id="compressButton" type="button">Compress PDF</button>
+        <p class="status" id="compressStatus" aria-live="polite"></p>
+      </article>
+
+      <!-- 4. PDF to Word -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#eaf2ff;--logo-color:#185abd" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <rect x="5" y="3" width="22" height="26" rx="3" fill="#185abd"/>
+              <path d="M11 11h10M11 16h10M11 21h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              <path d="M3 9h10v14H3z" fill="#103f91"/>
+              <path d="m5 13 2 7 2-5 2 5 2-7" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h2>PDF to Word</h2>
+        </div>
+        <p>Turn PDF content into an editable Word document.</p>
+        <span class="coming-label">Coming soon</span>
+        <button class="coming-button" type="button" disabled>PDF to Word</button>
+      </article>
+
+      <!-- 5. Word to PDF -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#eaf2ff;--logo-color:#185abd" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <rect x="5" y="3" width="22" height="26" rx="3" fill="#185abd"/>
+              <path d="M11 11h10M11 16h10M11 21h7" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+              <path d="M3 9h10v14H3z" fill="#103f91"/>
+              <path d="m5 13 2 7 2-5 2 5 2-7" fill="none" stroke="#fff" stroke-width="1.5" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h2>Word to PDF</h2>
+        </div>
+        <p>Convert Word documents into PDFs that are easy to share and read.</p>
+        <span class="coming-label">Coming soon</span>
+        <button class="coming-button" type="button" disabled>Word to PDF</button>
+      </article>
+
+      <!-- 6. Excel to PDF -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#e9f7ef;--logo-color:#217346" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <path d="M17 4h11v24H17z" fill="#217346"/>
+              <path d="M17 9h11M17 15h11M17 21h11M21 9v15M25 9v15" stroke="#fff" stroke-width="1"/>
+              <path d="M4 8 18 5v22L4 24z" fill="#185c37"/>
+              <path d="m8 12 6 8m0-8-6 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h2>Excel to PDF</h2>
+        </div>
+        <p>Make spreadsheets easy to view and share as PDFs.</p>
+        <span class="coming-label">Coming soon</span>
+        <button class="coming-button" type="button" disabled>Excel to PDF</button>
+      </article>
+
+      <!-- 7. PDF to Excel -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#e9f7ef;--logo-color:#217346" aria-hidden="true">
+            <svg viewBox="0 0 32 32">
+              <path d="M17 4h11v24H17z" fill="#217346"/>
+              <path d="M17 9h11M17 15h11M17 21h11M21 9v15M25 9v15" stroke="#fff" stroke-width="1"/>
+              <path d="M4 8 18 5v22L4 24z" fill="#185c37"/>
+              <path d="m8 12 6 8m0-8-6 8" stroke="#fff" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </span>
+          <h2>PDF to Excel</h2>
+        </div>
+        <p>Extract tables from PDFs into an editable spreadsheet.</p>
+        <span class="coming-label">Coming soon</span>
+        <button class="coming-button" type="button" disabled>PDF to Excel</button>
+      </article>
+
+      <!-- 8. Scan to PDF -->
+      <article class="tool">
+        <div class="tool-heading">
+          <span class="tool-logo" style="--logo-bg:#f0edff;--logo-color:#6650c8" aria-hidden="true">
+            <svg viewBox="0 0 32 32" fill="none">
+              <path d="M5 10V6h5M22 6h5v4M27 22v4h-5M10 26H5v-4" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+              <path d="M9 13h14v10H9z" fill="#fff" stroke="currentColor" stroke-width="2"/>
+              <circle cx="16" cy="18" r="3" stroke="currentColor" stroke-width="2"/>
+              <path d="M12 10 14 7h4l2 3" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/>
+            </svg>
+          </span>
+          <h2>Scan to PDF</h2>
+        </div>
+        <p>Take photos with your phone or choose images to create a PDF.</p>
+        <label for="cameraImages">Take or choose photos</label>
+        <input id="cameraImages" type="file" accept="image/*" capture="environment" multiple>
+        <button id="scanButton" type="button">Create PDF from photos</button>
+        <p class="status" id="scanStatus" aria-live="polite"></p>
+      </article>
+
     </section>
   </main>
 
-  <footer>
-    <p>PDFcraze — Free PDF tools that work in your browser.</p>
-  </footer>
+  <footer>PDFcraze — simple tools for your PDF files.</footer>
 
   <script src="https://unpkg.com/pdf-lib/dist/pdf-lib.min.js"></script>
   <script>
-    const fileInput = document.getElementById("pdfFiles");
-    const mergeButton = document.getElementById("mergeButton");
-    const status = document.getElementById("mergeStatus");
-
-    mergeButton.addEventListener("click", async () => {
-      const files = Array.from(fileInput.files || []);
-
-      if (files.length < 2) {
-        status.textContent = "Choose at least two PDF files.";
-        return;
-      }
-
-      if (!window.PDFLib) {
-        status.textContent = "The PDF tool could not load. Check your internet connection and try again.";
-        return;
-      }
-
-      mergeButton.disabled = true;
-      status.textContent = "Merging PDFs…";
-
-      let downloadUrl;
-
-      try {
-        const mergedPdf = await PDFLib.PDFDocument.create();
-
-        for (const file of files) {
-          const bytes = await file.arrayBuffer();
-          const sourcePdf = await PDFLib.PDFDocument.load(bytes);
-          const pages = await mergedPdf.copyPages(
-            sourcePdf,
-            sourcePdf.getPageIndices()
-          );
-
-          pages.forEach(page => mergedPdf.addPage(page));
-        }
-
-        const mergedBytes = await mergedPdf.save();
-        const blob = new Blob([mergedBytes], { type: "application/pdf" });
-        downloadUrl = URL.createObjectURL(blob);
-
-        const link = document.createElement("a");
-        link.href = downloadUrl;
-        link.download = "merged.pdf";
-        document.body.appendChild(link);
-        link.click();
-        link.remove();
-
-        status.textContent = "Done! Your merged PDF has been downloaded.";
-      } catch (error) {
-        console.error("PDF merge failed:", error);
-        status.textContent = "Could not merge these files. Make sure they are valid, unprotected PDFs.";
-      } finally {
-        mergeButton.disabled = false;
-
-        if (downloadUrl) {
-          setTimeout(() => URL.revokeObjectURL(downloadUrl), 1000);
-        }
-      }
-    });
-  </script>
-</body>
-</html>
-
-<article class="tool">
-  <div class="icon" aria-hidden="true">✂️</div>
-  <h2>Split PDF</h2>
-  <p>Save one page from a PDF as a new PDF file.</p>
-
-  <label for="splitFile">Choose a PDF</label>
-  <input id="splitFile" type="file" accept="application/pdf,.pdf">
-
-  <label for="splitPage">Page number to extract</label>
-  <input id="splitPage" type="number" min="1" value="1">
-
-  <button id="splitButton" type="button">Extract page</button>
-  <p class="status" id="splitStatus" aria-live="polite"></p>
-</article>
-```
-<script>
-  const splitButton = document.getElementById("splitButton");
-  const splitStatus = document.getElementById("splitStatus");
-
-  splitButton.addEventListener("click", async () => {
-    const file = document.getElementById("splitFile").files[0];
-    const pageNumber = Number(document.getElementById("splitPage").value);
-
-    if (!file) {
-      splitStatus.textContent = "Choose a PDF file first.";
-      return;
-    }
-
-    if (!Number.isInteger(pageNumber) || pageNumber < 1) {
-      splitStatus.textContent = "Enter a valid page number.";
-      return;
-    }
-
-    if (!window.PDFLib) {
-      splitStatus.textContent = "The PDF tool could not load. Check your internet connection.";
-      return;
-    }
-
-    splitButton.disabled = true;
-    splitStatus.textContent = "Extracting page…";
-
-    try {
-      const source = await PDFLib.PDFDocument.load(await file.arrayBuffer());
-      const pageCount = source.getPageCount();
-
-      if (pageNumber > pageCount) {
-        splitStatus.textContent = `This PDF has ${pageCount} page(s). Enter a page number from 1 to ${pageCount}.`;
-        return;
-      }
-
-      const output = await PDFLib.PDFDocument.create();
-      const [page] = await output.copyPages(source, [pageNumber - 1]);
-      output.addPage(page);
-
-      const bytes = await output.save();
+    function downloadPdf(bytes, filename) {
       const blob = new Blob([bytes], { type: "application/pdf" });
       const url = URL.createObjectURL(blob);
       const link = document.createElement("a");
 
       link.href = url;
-      link.download = `page-${pageNumber}.pdf`;
+      link.download = filename;
       document.body.appendChild(link);
       link.click();
       link.remove();
 
       setTimeout(() => URL.revokeObjectURL(url), 1000);
-      splitStatus.textContent = "Done! The extracted page has been downloaded.";
-    } catch (error) {
-      console.error(error);
-      splitStatus.textContent = "Could not read this PDF. It may be damaged or password-protected.";
-    } finally {
-      splitButton.disabled = false;
     }
-  });
-</script>
+
+    function checkPdfLib(status) {
+      if (window.PDFLib) return true;
+      status.textContent = "PDF tools failed to load. Check your internet connection and refresh.";
+      return false;
+    }
+
+    document.getElementById("mergeButton").addEventListener("click", async () => {
+      const button = document.getElementById("mergeButton");
+      const status = document.getElementById("mergeStatus");
+      const files = Array.from(document.getElementById("mergeFiles").files);
+
+      if (files.length < 2) {
+        status.textContent = "Choose at least two PDF files.";
+        return;
+      }
+      if (!checkPdfLib(status)) return;
+
+      button.disabled = true;
+      status.textContent = "Merging PDFs…";
+
+      try {
+        const merged = await PDFLib.PDFDocument.create();
+
+        for (const file of files) {
+          const source = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+          const pages = await merged.copyPages(source, source.getPageIndices());
+          pages.forEach(page => merged.addPage(page));
+        }
+
+        downloadPdf(await merged.save(), "merged.pdf");
+        status.textContent = "Done! Your merged PDF has been downloaded.";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Could not merge these PDFs. A file may be damaged or password-protected.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("splitButton").addEventListener("click", async () => {
+      const button = document.getElementById("splitButton");
+      const status = document.getElementById("splitStatus");
+      const file = document.getElementById("splitFile").files[0];
+      const pageNumber = Number(document.getElementById("splitPage").value);
+
+      if (!file) {
+        status.textContent = "Choose a PDF file first.";
+        return;
+      }
+      if (!Number.isInteger(pageNumber) || pageNumber < 1) {
+        status.textContent = "Enter a valid page number.";
+        return;
+      }
+      if (!checkPdfLib(status)) return;
+
+      button.disabled = true;
+      status.textContent = "Extracting page…";
+
+      try {
+        const source = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+
+        if (pageNumber > source.getPageCount()) {
+          status.textContent = `This PDF has ${source.getPageCount()} page(s). Enter a valid page number.`;
+          return;
+        }
+
+        const output = await PDFLib.PDFDocument.create();
+        const [page] = await output.copyPages(source, [pageNumber - 1]);
+        output.addPage(page);
+
+        downloadPdf(await output.save(), `page-${pageNumber}.pdf`);
+        status.textContent = "Done! The extracted page has been downloaded.";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Could not read this PDF. It may be damaged or password-protected.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("compressButton").addEventListener("click", async () => {
+      const button = document.getElementById("compressButton");
+      const status = document.getElementById("compressStatus");
+      const file = document.getElementById("compressFile").files[0];
+
+      if (!file) {
+        status.textContent = "Choose a PDF file first.";
+        return;
+      }
+      if (!checkPdfLib(status)) return;
+
+      button.disabled = true;
+      status.textContent = "Processing PDF…";
+
+      try {
+        const pdf = await PDFLib.PDFDocument.load(await file.arrayBuffer());
+        const bytes = await pdf.save({ useObjectStreams: true });
+
+        downloadPdf(bytes, `compressed-${file.name}`);
+
+        if (bytes.length < file.size) {
+          const reduction = Math.round((1 - bytes.length / file.size) * 100);
+          status.textContent = `Done! File size reduced by about ${reduction}%.`;
+        } else {
+          status.textContent = "PDF saved, but this file could not be made smaller.";
+        }
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Could not process this PDF. It may be damaged or password-protected.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+
+    document.getElementById("scanButton").addEventListener("click", async () => {
+      const button = document.getElementById("scanButton");
+      const status = document.getElementById("scanStatus");
+      const files = Array.from(document.getElementById("cameraImages").files);
+
+      if (files.length === 0) {
+        status.textContent = "Take or choose at least one photo.";
+        return;
+      }
+      if (!checkPdfLib(status)) return;
+
+      button.disabled = true;
+      status.textContent = "Creating PDF from photos…";
+
+      try {
+        const pdf = await PDFLib.PDFDocument.create();
+
+        for (const file of files) {
+          let image;
+
+          if (file.type === "image/jpeg" || /\.jpe?g$/i.test(file.name)) {
+            image = await pdf.embedJpg(await file.arrayBuffer());
+          } else {
+            const bitmap = await createImageBitmap(file);
+            const canvas = document.createElement("canvas");
+            canvas.width = bitmap.width;
+            canvas.height = bitmap.height;
+            canvas.getContext("2d").drawImage(bitmap, 0, 0);
+            bitmap.close();
+
+            const pngBlob = await new Promise(resolve => canvas.toBlob(resolve, "image/png"));
+            if (!pngBlob) throw new Error("Could not process image");
+
+            image = await pdf.embedPng(await pngBlob.arrayBuffer());
+          }
+
+          const page = pdf.addPage([image.width, image.height]);
+          page.drawImage(image, {
+            x: 0,
+            y: 0,
+            width: image.width,
+            height: image.height
+          });
+        }
+
+        downloadPdf(await pdf.save(), "scanned-photos.pdf");
+        status.textContent = "Done! Your photo PDF has been downloaded.";
+      } catch (error) {
+        console.error(error);
+        status.textContent = "Could not convert one or more photos. Try JPG or PNG images.";
+      } finally {
+        button.disabled = false;
+      }
+    });
+  </script>
+</body>
+</html>
